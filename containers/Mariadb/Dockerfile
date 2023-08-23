@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 RUN apt-get update && apt-get install -y mariadb-server
 
@@ -10,4 +10,4 @@ RUN chmod +x script
 
 RUN ./script
 
-CMD ["mysqld", "--skip_networking=false"]#read this 
+CMD ["mariadbd", "--skip_networking=false"]#read this 

@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 RUN apt update -y && apt upgrade -y && apt install nginx -y
 RUN apt install openssl -y
 COPY conf/certificate.crt /etc/ssl/

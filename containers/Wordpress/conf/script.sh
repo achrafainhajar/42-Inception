@@ -2,9 +2,9 @@
 chown -R www-data:www-data /var/www/html/wordpress
 
 mkdir -p /run/php
-touch /run/php/php7.3-fpm.sock
+touch /run/php/php7.4-fpm.sock
 chown -R www-data:www-data /run/php/
-chmod 660 /run/php/php7.3-fpm.sock
+chmod 660 /run/php/php7.4-fpm.sock
 cd /var/www/html/wordpress
 wp core download --allow-root
 wp core config --dbname=${MYSQL_DATABASE} --dbuser=${MYSQL_USER} --dbpass=${MYSQL_PASSWORD} --dbhost=mariadb --allow-root
