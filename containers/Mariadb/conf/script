@@ -1,0 +1,7 @@
+
+service mysql start 
+mariadb -u root -e "CREATE DATABASE IF NOT EXISTS localhost;"
+mariadb -u root -e "CREATE USER 'aainhaja'@'%' IDENTIFIED BY 'password' ; GRANT ALL PRIVILEGES ON *.* TO 'aainhaja'@'%'; FLUSH PRIVILEGES; "
+mariadb -u root -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password'; FLUSH PRIVILEGES;"
+
+exec $@
