@@ -1,29 +1,31 @@
-NAME = inception
+FILE=./srcs/docker-compose.yml
 
-all : $(NAME)
+up:
+	mkdir -p /home/aainhaja/data/wordpress && \
+    mkdir -p /home/aainhaja/data/mariadb && \
+    docker compose -f $(FILE) up -d --build
 
-$(NAME) :
-	sudo mkdir -p "/home/achraf/data/wordpress"
-	sudo mkdir -p "/home/achraf/data/mariadb"
-	sudo docker compose -f docker-compose.yml up --build -d
+build:
+	docker compose -f $(FILE) build
 
-down :
-	sudo docker compose -f docker-compose.yml down
-	
-restart :
-	sudo docker compose -f docker-compose.yml restart
+down:
+	docker compose -f $(FILE) down
 
+logs:
+	docker compose -f $(FILE) logs
 
-prune :
-	sudo docker compose -f docker-compose.yml down --rmi all --volumes
-	
+clean:
+	docker compose -f $(FILE) down -v --rmi all && \
+    docker system prune -f
 
-re : fclean all
-	
+fclean: clean
+	rm -rf /home/aainhaja/data/wordpress/* && \
+	rm -rf /home/aainhaja/data/mariadb/* 
+wp-bash:
+	docker compose -f $(FILE) exec wordpress /bin/bash
 
-clean : down prune
+nginx-bash:
+	docker compose -f $(FILE) exec nginx /bin/bash
 
-
-fclean : clean
-	sudo rm -rf /home/achraf/data/wordpress
-	sudo rm -rf /home/achraf/data/mariadb
+mariadb-bash:
+	docker compose -f $(FILE) exec mariadb /bin/bash

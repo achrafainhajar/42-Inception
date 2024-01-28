@@ -11,6 +11,7 @@ services:
       - wordpress
     depends_on:
       - mariadb
+    image: wordpress
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -28,6 +29,7 @@ services:
     container_name: mariadb
     build: ./requirements/mariadb/
     restart: always
+    image: mairiadb
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -45,6 +47,7 @@ services:
     depends_on:
       - wordpress
     build: ./requirements/nginx/
+    image: nginx
     networks:
       - wordpress
     ports:
@@ -64,12 +67,12 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/achraf/data/wordpress
+      device: /home/aainhaja/data/wordpress
       o: bind
 
   mariadb:
     driver: local
     driver_opts:
       type: none
-      device: /home/achraf/data/mariadb
+      device: /home/aainhaja/data/mariadb
       o: bind
